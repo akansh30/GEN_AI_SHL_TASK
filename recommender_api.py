@@ -7,7 +7,7 @@ import pandas as pd
 from sentence_transformers import SentenceTransformer
 import difflib
 from llm_query_parser import get_structured_prompt, query_groq_llm
-
+#for checking health status
 app = FastAPI()
 @app.get("/health")
 def health_check():
@@ -19,7 +19,7 @@ INDEX_PATH = os.path.join(BASE_DIR, "shl_index.faiss")
 CSV_PATH = os.path.join(BASE_DIR, "shl_assessments_with_ids.csv")
 MODEL_PATH = os.path.join(BASE_DIR, "models", "all-MiniLM-L6-v2")  # Local model path
 
-# Load model and index
+# Loading model and index
 model = SentenceTransformer(MODEL_PATH)
 index = faiss.read_index(INDEX_PATH)
 df = pd.read_csv(CSV_PATH)
@@ -42,11 +42,11 @@ def home():
 
 @app.post("/recommend", response_model=List[AssessmentOut])
 def recommend(query: Query):
-    # Step 1: LLM Parse
+    # Step 1: LLM Parsing
     prompt = get_structured_prompt(query.text)
     parsed = query_groq_llm(prompt)
 
-    # Optional: Print for debugging
+    # Printing for debugging
     print("LLM Parsed:", parsed)
 
     skills = parsed.get("skills", [])
@@ -54,7 +54,7 @@ def recommend(query: Query):
     duration_limit = parsed.get("duration_limit", None)
     remote_required = parsed.get("remote", None)
 
-    # Step 2: Enhanced query for embedding
+    # Step 2: Enhancing query for embedding
     enhanced_query = f"A {' and '.join(traits)} role needing {' and '.join(skills)} assessments"
     if duration_limit:
         enhanced_query += f" under {duration_limit} minutes"
