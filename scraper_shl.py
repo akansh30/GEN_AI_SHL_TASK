@@ -32,7 +32,7 @@ print("Loading catalog...")
 driver.get(CATALOG_URL)
 wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody tr")))
 
-# Extract product links and test type codes
+# Extracting product links and test type codes
 products = []
 
 while True:
@@ -73,7 +73,7 @@ while True:
         except Exception as e:
             print(f"Skipping row due to error: {e}")
 
-    # Click the next page button if it exists and is enabled
+    # Clicking the next page button if it exists and is enabled
     try:
         next_btn = driver.find_element(By.LINK_TEXT, "Next")
         if "disabled" in next_btn.get_attribute("class") or not next_btn.is_displayed():
@@ -84,7 +84,7 @@ while True:
 
 print(f"Found {len(products)} products...")
 
-# Visit each product page to fetch details
+# Visiting each product page to fetch details
 data = []
 
 def get_detail_fields():
@@ -117,7 +117,7 @@ for idx, product in enumerate(products):
     try:
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "h1")))
     except:
-        print("⚠️ Timeout waiting for page to load.")
+        print("Timeout waiting for page to load.")
         continue
 
     name = driver.find_element(By.CSS_SELECTOR, "h1").text.strip()
@@ -135,12 +135,12 @@ for idx, product in enumerate(products):
         "Assessment Length": details.get("Assessment length", "")
     })
 
-    # Save intermediate progress
+    # Saving intermediate progress
     if (idx + 1) % 10 == 0:
         pd.DataFrame(data).to_csv("shl_assessments_progress.csv", index=False)
         print("💾 Progress saved.")
 
-# Final save
+# Final saving
 df = pd.DataFrame(data)
 df.to_csv("shl_assessments_full.csv", index=False)
 print("✅ Data saved to shl_assessments_full.csv")
