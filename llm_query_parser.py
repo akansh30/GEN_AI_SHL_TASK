@@ -40,7 +40,7 @@ def query_groq_llm(prompt: str) -> dict:
         response.raise_for_status()
         content = response.json()["choices"][0]["message"]["content"]
 
-        # 🧼 Remove code block wrappers or explanation if present
+        # Remove code block wrappers or explanation if present
         if content.startswith("```"):
             content = content.strip("`").strip()
             if content.startswith("json"):
@@ -49,10 +49,10 @@ def query_groq_llm(prompt: str) -> dict:
         return json.loads(content)
 
     except json.JSONDecodeError as e:
-        print("⚠️ JSON parsing failed:", e)
-        print("📝 Raw content returned:", content)
+        print("JSON parsing failed:", e)
+        print("Raw content returned:", content)
         return {}
 
     except Exception as e:
-        print("❌ Groq API error:", e)
+        print("Groq API error:", e)
         return {}
