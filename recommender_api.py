@@ -7,7 +7,6 @@ import pandas as pd
 from sentence_transformers import SentenceTransformer
 import difflib
 from llm_query_parser import get_structured_prompt, query_groq_llm
-from huggingface_hub import cached_download
 
 app = FastAPI()
 
@@ -15,12 +14,10 @@ app = FastAPI()
 BASE_DIR = os.path.dirname(__file__)
 INDEX_PATH = os.path.join(BASE_DIR, "shl_index.faiss")
 CSV_PATH = os.path.join(BASE_DIR, "shl_assessments_with_ids.csv")
-
-# HuggingFace cache fix for Render
-os.environ["TRANSFORMERS_CACHE"] = "./hf_cache"
+MODEL_PATH = os.path.join(BASE_DIR, "models", "all-MiniLM-L6-v2")  # Local model path
 
 # Load model and index
-model = SentenceTransformer('all-MiniLM-L6-v2')
+model = SentenceTransformer(MODEL_PATH)
 index = faiss.read_index(INDEX_PATH)
 df = pd.read_csv(CSV_PATH)
 
