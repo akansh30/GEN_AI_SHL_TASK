@@ -6,14 +6,14 @@ import json
 from llm_query_parser import get_structured_prompt, query_groq_llm
 
 st.set_page_config(page_title="SHL Assessment Recommender", layout="wide")
-st.title("🔍 SHL Assessment Recommender")
+st.title("SHL Assessment Recommender")
 st.write("Enter a job description URL or natural language query to get relevant SHL assessments.")
 
 # Input area
-query = st.text_area("📄 Job Description / Query", height=200)
-use_llm = st.checkbox("🤖 Use LLM for Smart Query Understanding", value=True)
+query = st.text_area("Job Description / Query", height=100)
+use_llm = st.checkbox("Use LLM for Smart Query Understanding", value=True)
 
-if st.button("🚀 Get Recommendations"):
+if st.button("Get Recommendations"):
     if not query.strip():
         st.warning("Please enter a query before submitting.")
     else:
@@ -23,11 +23,11 @@ if st.button("🚀 Get Recommendations"):
                 if use_llm:
                     structured = query_groq_llm(get_structured_prompt(query))
 
-                    # Show LLM Parsed Result Nicely
-                    st.subheader("🧠 LLM Parsed Query:")
+                    # Showing LLM Parsed Result in a structured way
+                    st.subheader("LLM Parsed Query:")
                     st.json(structured)
 
-                    # Construct enhanced query string
+                    # Constructing enhanced query string
                     traits = ", ".join(structured.get("traits", []))
                     skills = ", ".join(structured.get("skills", []))
                     duration = structured.get("duration_limit", 60)
@@ -38,7 +38,7 @@ if st.button("🚀 Get Recommendations"):
                 else:
                     payload = {"text": query}
 
-                # Call recommender API
+                # Calling recommender API
                 response = requests.post(
                     "https://gen-ai-shl-task.onrender.com/recommend",
                     headers={"Content-Type": "application/json"},
@@ -50,7 +50,7 @@ if st.button("🚀 Get Recommendations"):
                     if data:
                         df = pd.DataFrame(data)
 
-                        # Link assessment names to their URLs
+                        # Linking assessment names to their URLs
                         df["Assessment Name"] = df.apply(
                             lambda row: f"[{row['assessment_name']}]({row['url']})", axis=1
                         )
