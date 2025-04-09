@@ -1,6 +1,6 @@
 # SHL Gen AI Assessment Recommender
 
-An intelligent recommendation system that takes a natural language job description or query and returns the most relevant SHL assessments using LLM-powered parsing, semantic search, and post-filtering logic.
+An intelligent recommendation system fOR SHL Product catalog that takes a natural language job description or query and returns the most relevant SHL assessments using LLM-powered parsing, semantic search, and post-filtering logic.
 
 ---
 ## 🚀 Features
