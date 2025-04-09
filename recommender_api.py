@@ -9,6 +9,9 @@ import difflib
 from llm_query_parser import get_structured_prompt, query_groq_llm
 
 app = FastAPI()
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
 
 # Paths
 BASE_DIR = os.path.dirname(__file__)
