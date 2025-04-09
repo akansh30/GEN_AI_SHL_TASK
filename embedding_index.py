@@ -8,8 +8,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def build_index(df):
-    model_path = os.path.join(BASE_DIR, "models", "all-MiniLM-L6-v2")  # Local model path
-    model = SentenceTransformer(model_path)  # Load from local dir
+    model_path = os.path.join(BASE_DIR, "models", "all-MiniLM-L6-v2")  # model path
+    model = SentenceTransformer(model_path)  # Loading
     embeddings = model.encode(df['Text for Embedding'].tolist(), show_progress_bar=True)
     index = faiss.IndexFlatL2(embeddings.shape[1])
     index.add(np.array(embeddings))
