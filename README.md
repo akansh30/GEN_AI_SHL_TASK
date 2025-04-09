@@ -14,7 +14,7 @@ An intelligent recommendation system for SHL that takes a natural language job d
 ---
 ## 📸 Demo Screenshots
 
-![Screenshot 2025-04-07 103030](https://github.com/user-attachments/assets/72bf99a6-de44-4080-bb5e-9b720d067b62)
+![Working Backend](https://github.com/user-attachments/assets/72bf99a6-de44-4080-bb5e-9b720d067b62)
 ![Screenshot 2025-04-10 001406](https://github.com/user-attachments/assets/2147540c-aac7-47b0-a52c-688ae676740e)
 ![Screenshot 2025-04-10 001509](https://github.com/user-attachments/assets/869f64a9-a14e-43b5-aa31-3148efe528dd)
 ![Screenshot 2025-04-10 011745](https://github.com/user-attachments/assets/8c16aece-38ca-451c-b181-9effcc37dd9d)
