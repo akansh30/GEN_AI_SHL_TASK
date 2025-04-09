@@ -9,3 +9,4 @@ requests
 python-dotenv
 sentence-transformers==2.2.2
 groq
+huggingface_hub==0.14.1
